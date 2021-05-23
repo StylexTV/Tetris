@@ -2,4 +2,4 @@
 
 Just a simple Tetris game.
 
-![Screenshot]()
+![Screenshot](https://raw.githubusercontent.com/StylexTV/Tetris/main/screenshots/0.png)
