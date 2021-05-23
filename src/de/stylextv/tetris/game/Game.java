@@ -89,6 +89,8 @@ public class Game {
 			return;
 		}
 		
+		boolean noDelay = false;
+		
 		if(deathScreenState != 0) {
 			
 			deathScreenState++;
@@ -104,15 +106,6 @@ public class Game {
 				flash = false;
 				
 				summonRandomPiece();
-				
-				if(movingPiece.overlaps(blocks)) {
-					
-					movingPiece.manifest(blocks);
-					
-					deathScreenState = 1;
-					
-					SoundUtil.play(SoundUtil.DEATH_SOUND);
-				}
 				
 			} else {
 				
@@ -133,6 +126,8 @@ public class Game {
 						
 						level++;
 					}
+					
+					noDelay = true;
 					
 				} else {
 					for(int y = 0; y < HEIGHT; y++) {
@@ -159,10 +154,16 @@ public class Game {
 				movingPiece = null;
 				
 				clearFullLines();
+				
+				noDelay = true;
 			}
 		}
 		
-		updateTimer = deathScreenState != 0 ? DEATH_SCREEN_RATE : clearState == -1 ? getUpdateRate() : CLEAR_RATE;
+		if(noDelay) {
+			update();
+		} else {
+			updateTimer = deathScreenState != 0 ? DEATH_SCREEN_RATE : clearState == -1 ? getUpdateRate() : CLEAR_RATE;
+		}
 	}
 	
 	public void clear() {
@@ -231,6 +232,15 @@ public class Game {
 		movingPiece = new MovingPiece(Piece.random(), BlockType.random(), WIDTH / 2 - 2, -10);
 		
 		movingPiece.putIntoBounds();
+		
+		if(movingPiece.overlaps(blocks)) {
+			
+			movingPiece.manifest(blocks);
+			
+			deathScreenState = 1;
+			
+			SoundUtil.play(SoundUtil.DEATH_SOUND);
+		}
 	}
 	
 	private void clearLine(int y) {

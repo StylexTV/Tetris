@@ -12,7 +12,7 @@ public class GameRenderer {
 	
 	public static final int SCALE = 4;
 	
-	public static final int BLOCK_SIZE = 6;
+	public static final int BLOCK_SIZE = 7;
 	
 	public static final int CANVAS_WIDTH = (BLOCK_SIZE + 1) * Game.WIDTH + 1;
 	public static final int CANVAS_HEIGHT = (BLOCK_SIZE + 1) * Game.HEIGHT + 1;
@@ -72,7 +72,6 @@ public class GameRenderer {
 		int h = game.getDeathScreenState();
 		
 		int barWidth = CANVAS_WIDTH - 2;
-		int barHeight = BLOCK_SIZE / 3;
 		
 		for(int y = 0; y < h; y++) {
 			
@@ -80,13 +79,13 @@ public class GameRenderer {
 			int renderY = y * (BLOCK_SIZE + 1) + 1;
 			
 			canvasGraphics.setColor(palette.getSecondaryColor());
-			canvasGraphics.fillRect(renderX, renderY, barWidth, barHeight);
+			canvasGraphics.fillRect(renderX, renderY, barWidth, 2);
 			
 			canvasGraphics.setColor(ColorPalette.WHITE);
-			canvasGraphics.fillRect(renderX, renderY + barHeight, barWidth, barHeight);
+			canvasGraphics.fillRect(renderX, renderY + 2, barWidth, 3);
 			
 			canvasGraphics.setColor(palette.getPrimaryColor());
-			canvasGraphics.fillRect(renderX, renderY + barHeight * 2, barWidth, barHeight);
+			canvasGraphics.fillRect(renderX, renderY + 5, barWidth, 2);
 		}
 		
 		graphics.drawImage(canvas, 0, 0, CANVAS_WIDTH * SCALE, CANVAS_HEIGHT * SCALE, null);
