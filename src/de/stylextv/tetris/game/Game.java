@@ -9,7 +9,7 @@ public class Game {
 	public static final int HEIGHT = 20;
 	
 	public static final int UPDATE_RATE = 80;
-	public static final int CLEAR_RATE = 10;
+	public static final int CLEAR_RATE = 8;
 	public static final int DEATH_SCREEN_RATE = 10;
 	
 	private Matrix blocks = new Matrix(WIDTH, HEIGHT);
